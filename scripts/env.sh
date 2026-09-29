@@ -16,5 +16,10 @@ export OMNI_KIT_ACCEPT_EULA=YES
 activate_behavior() {
     # shellcheck disable=SC1091
     source "$CONDA_ROOT/etc/profile.d/conda.sh"
+    # Activation hooks may read unset variables; don't let callers' `set -u` abort on them.
+    local restore_u=0
+    [[ $- == *u* ]] && restore_u=1 && set +u
     conda activate behavior
+    [ "$restore_u" = 1 ] && set -u
+    return 0
 }

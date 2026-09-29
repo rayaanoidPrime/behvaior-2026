@@ -41,7 +41,8 @@ the RTX Pro 6000 GPU attached.
    2. **Check environment** (`scripts/check_env.sh`): GPU, Vulkan/graphics driver libs, disk, RAM.
       Read this output before installing anything; see the caveats below.
    3. **Install** (`scripts/install_behavior.sh`): user-space Miniforge, BEHAVIOR-1K at the pinned
-      tag, then upstream `setup.sh --omnigibson --bddl --joylo --eval --dataset`. This accepts the Conda
+      tag, upstream `setup.sh --omnigibson --bddl --joylo --eval`, the missing `warp-lang`
+      dependency, then the simulator assets and 2026 task instances. This accepts the Conda
       ToS, NVIDIA Omniverse EULA and BEHAVIOR data license on your behalf.
    4. **Smoke test** (`scripts/smoke_test.sh`): one task, 50 zero-action steps, no server. If this
       writes a video to `outputs/smoke/`, rendering works.
