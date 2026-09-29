@@ -1,0 +1,26 @@
+[project]
+name = "behavior-2026"
+version = "0.1.0"
+description = "Entry for the 2026 BEHAVIOR Challenge"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "msgpack",
+    "websockets>=15.0.1",
+]
+
+[dependency-groups]
+notebooks = [
+    "marimo",
+    "huggingface_hub[cli]",
+    "pandas",
+    "pyarrow",
+]
+dev = ["pytest"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

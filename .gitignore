@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+uv.lock
+
+# eval outputs, videos, submission zips
+outputs/
+
+# marimo
+__marimo__/
+.marimo/
+
+# in case the heavy stuff is placed inside the repo
+BEHAVIOR-1K/
+2026-challenge-demos/
+checkpoints/
