@@ -25,14 +25,22 @@ if [ ! -d "$PATH_TO_BEHAVIOR_1K/.git" ]; then
     git clone --depth 1 -b "$B1K_TAG" https://github.com/StanfordVL/BEHAVIOR-1K.git "$PATH_TO_BEHAVIOR_1K"
 fi
 
-if conda env list | grep -q "^behavior "; then
-    echo ">> conda env 'behavior' already exists; skipping setup.sh"
-    echo "   (to rebuild: conda env remove -n behavior && rerun)"
+DONE_MARKER="$B1K_WORK/.setup_done_$B1K_TAG"
+if [ -f "$DONE_MARKER" ]; then
+    echo ">> BEHAVIOR-1K setup already completed; skipping setup.sh"
+    echo "   (to rebuild: rm $DONE_MARKER && rerun)"
 else
+    # A previous run may have died half-way; setup.sh refuses to reuse an existing env.
+    if conda env list | grep -q "^behavior "; then
+        echo ">> Removing incomplete conda env 'behavior' from a previous failed run"
+        conda env remove -n behavior -y
+    fi
     echo ">> Running BEHAVIOR-1K setup.sh (Isaac Sim + OmniGibson + assets; this takes a while)"
     cd "$PATH_TO_BEHAVIOR_1K"
-    ./setup.sh --new-env --omnigibson --bddl --eval --dataset \
+    # --eval requires --joylo in upstream setup.sh.
+    ./setup.sh --new-env --omnigibson --bddl --joylo --eval --dataset \
         --accept-conda-tos --accept-nvidia-eula --accept-dataset-tos
+    touch "$DONE_MARKER"
 fi
 
 echo ">> Done. Next: scripts/smoke_test.sh"
