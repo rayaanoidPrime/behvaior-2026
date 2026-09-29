@@ -34,9 +34,8 @@ schema on the first request.
 This laptop has no GPU; the simulator runs on a [molab](https://molab.marimo.io) notebook with
 the RTX Pro 6000 GPU attached.
 
-1. The repo lives at https://github.com/rayaanoidPrime/behvaior-2026 (private); create a
-   fine-grained GitHub token with read access to it for the notebook's clone step.
-2. Open `notebooks/molab_setup.py` in molab, attach the GPU, paste the token.
+1. Open `notebooks/molab_setup.py` from https://github.com/rayaanoidPrime/behvaior-2026 in molab.
+2. Attach the GPU.
 3. Click through the buttons in order:
    1. **Clone** this repo into `~/behvaior-2026`.
    2. **Check environment** (`scripts/check_env.sh`): GPU, Vulkan/graphics driver libs, disk, RAM.
